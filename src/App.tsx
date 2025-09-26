@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 import './App.css'
 
 import { Button } from "@/components/ui/button"
@@ -23,201 +24,111 @@ function App() {
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">Kyle Galvez</h1>
-          <nav className="hidden md:flex gap-6">
-            <Button variant="ghost">About</Button>
-            <Button variant="ghost">Projects</Button>
-            <Button variant="ghost">Contact</Button>
-          </nav>
-          <Button>Get In Touch</Button>
+
+          <h1 className="text-xl font-bold cursor-pointer hover:text-slate-600 transition-colors" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>KG</h1>
+          
+          <nav className="hidden md:flex gap-6 items-right">
+            <Button variant="ghost" onClick={() => document.getElementById("experience")?.scrollIntoView({behavior: 'smooth'})}>Experience</Button>
+            <Button variant="ghost" onClick={() => document.getElementById("projects")?.scrollIntoView({behavior: 'smooth'})}>Projects</Button>
+            <Dialog>
+                <form>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg" className="px-8">
+                      Resume
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[90vh]">
+                    <DialogHeader>
+                      <DialogTitle>Kyle's Resume</DialogTitle>
+                    </DialogHeader>
+                    <div className="overflow-hidden rounded-lg border">
+                      <iframe 
+                        src="images/Resume_KyleGalvez.pdf" 
+                        className="w-full h-[500px]"
+                        title="Kyle Galvez Resume"/>
+                    </div>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button variant="outline">Cancel</Button>
+                      </DialogClose>
+                      <Button variant="ghost">
+                        <a href="images/Resume_KyleGalvez.pdf" download="Kyle_Galvez_Resume.pdf">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                          </svg>
+                        </a>
+                      </Button>
+                      
+                    </DialogFooter>
+                  </DialogContent>
+                </form>
+              </Dialog>
+            </nav>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section id="hero" className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <Avatar className="w-32 h-32 mx-auto" id="profile_img">
-            <AvatarImage className="object-cover object-top" src="/images/profile.jpg" alt="Image of Kyle Galvez" />
-            <AvatarFallback className="text-2xl">KG</AvatarFallback>
-          </Avatar>
-          
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl font-bold text-slate-900">
-              Hello, I'm Kyle
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600">
-              Software Developer
-            </p>
-          </div>
-
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button variant="outline" size="lg" className="px-8" onClick={() => document.getElementById("projects")?.scrollIntoView({behavior: 'smooth'})}>
-              View My Work
-            </Button>
+      <section id="hero" className="py-35 px-4">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-0">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <Avatar className="w-32 h-32 mx-auto" id="profile_img">
+              <AvatarImage className="object-cover object-top" src="/images/profile.jpg" alt="Image of Kyle Galvez" />
+              <AvatarFallback className="text-2xl">KG</AvatarFallback>
+            </Avatar>
             
-            <Dialog>
-              <form>
-                <DialogTrigger asChild>
-                  <Button variant="outline" size="lg" className="px-8">
-                    Download Resume
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl max-h-[90vh]">
-                  <DialogHeader>
-                    <DialogTitle>Kyle's Resume</DialogTitle>
-                  </DialogHeader>
-                  <div className="overflow-hidden rounded-lg border">
-                    <iframe 
-                      src="images/Resume_KyleGalvez.pdf" 
-                      className="w-full h-[500px]"
-                      title="Kyle Galvez Resume"/>
-                  </div>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <Button variant="ghost">
-                      <a href="images/Resume_KyleGalvez.pdf" download="Kyle_Galvez_Resume.pdf">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                        </svg>
-                      </a>
-                    </Button>
-                    
-                  </DialogFooter>
-                </DialogContent>
-              </form>
-            </Dialog>
-          </div>
-
-        </div>
-      </section>
-
-      <Separator className="my-12" />
-      
-      {/* About Me Section */}
-      <section id="about_me" className="py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
-            About Me
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-slate-700 leading-relaxed">
-                I'm a passionate software developer with a love for creating innovative solutions 
-                and building meaningful digital experiences. With expertise in modern web technologies, 
-                I enjoy tackling complex problems and turning ideas into reality.
-              </p>
-              
-              <p className="text-lg text-slate-700 leading-relaxed">
-                When I'm not coding, you can find me exploring new technologies, contributing to 
-                open-source projects, or sharing knowledge with the developer community.
-              </p>
-              
               <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-slate-900">Technologies I Love</h3>
-                <div className="flex flex-wrap gap-2">
+                <h1 className="text-4xl md:text-6xl font-bold text-slate-900">
+                  Hello, I'm Kyle
+                </h1>
+                <p className="text-xl md:text-2xl text-slate-600">
+                  Software Developer
+                </p>
+              </div>
+          </div>
+        
+
+          <div className="max-w-2xl mx-auto text-center space-y-6 px-11">
+            <p className="text-lg text-slate-700 leading-relaxed">
+              I'm a passionate software developer with a love for creating innovative solutions 
+              and building meaningful digital experiences. With expertise in modern web technologies, 
+              I enjoy tackling complex problems and turning ideas into reality. 
+            </p>
+            
+            <p className="text-lg text-slate-700 leading-relaxed mb-15 md:mb-6">
+              Beyond work, I enjoy travel, rock climbing, gym, volleyball, hiking, and
+              exploring new foods and places.
+            </p>
+            
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="space-y-4 flex-1">
+                <h3 className="text-xl font-semibold text-slate-900">Langauges</h3>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  <Badge variant="secondary">Python</Badge>
                   <Badge variant="secondary">JavaScript</Badge>
                   <Badge variant="secondary">TypeScript</Badge>
+                  <Badge variant="secondary">C/C++</Badge>
+                  <Badge variant="secondary">HTML/CSS</Badge>
+                </div>
+              </div>
+
+              <div className="space-y-4 flex-1">
+                <h3 className="text-xl font-semibold text-slate-900">Technologies</h3>
+                <div className="flex flex-wrap gap-2 justify-center">
                   <Badge variant="secondary">React</Badge>
-                  <Badge variant="secondary">Node.js</Badge>
-                  <Badge variant="secondary">Python</Badge>
                   <Badge variant="secondary">Tailwind CSS</Badge>
-                  <Badge variant="secondary">Git</Badge>
+                  <Badge variant="secondary">Git/Github</Badge>
                   <Badge variant="secondary">AWS</Badge>
+                  <Badge variant="secondary">Docker</Badge>
+                  <Badge variant="secondary">Postman</Badge>
                 </div>
               </div>
             </div>
-            
-            <div className="space-y-6">
-              <Card className="p-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-slate-600">Currently Available</span>
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold">Let's Work Together</h3>
-                  <p className="text-slate-600">
-                    I'm always interested in discussing new opportunities, 
-                    collaborating on exciting projects, or simply connecting with fellow developers.
-                  </p>
-                  
-                  <Button className="w-full mt-4">
-                    Start a Conversation
-                  </Button>
-                </div>
-              </Card>
-              
-              <Card className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200">
-                <div className="space-y-3">
-                  <h3 className="text-lg font-semibold text-slate-900">Quick Facts</h3>
-                  <div className="space-y-2 text-sm text-slate-700">
-                    <div className="flex justify-between">
-                      <span>☕ Coffee consumed today:</span>
-                      <span className="font-medium">3 cups</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>🎯 Current focus:</span>
-                      <span className="font-medium">Full-stack development</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>🌱 Learning:</span>
-                      <span className="font-medium">AI/ML integration</span>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </div>
           </div>
         </div>
       </section>
-
-      {/* Projects Preview */}
-      <section id="projects" className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
-            Featured Projects
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((project) => (
-              <Card key={project} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <CardHeader>
-                  <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md mb-4 flex items-center justify-center">
-                    <span className="text-slate-500 text-sm">Project Screenshot</span>
-                  </div>
-                  <CardTitle>Project Title {project}</CardTitle>
-                  <CardDescription>
-                    A brief description of what this project does and the problems it solves.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">React</Badge>
-                    <Badge variant="outline">TypeScript</Badge>
-                    <Badge variant="outline">Tailwind</Badge>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      View Code
-                    </Button>
-                    <Button size="sm" className="flex-1">
-                      Live Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Separator className="my-12" />
 
       {/* Career Path Section */}
-      <section className="py-20 px-4 bg-slate-50">
+      <section id="experience" className="py-35 px-4 bg-slate-50">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
             Career Path
@@ -468,6 +379,46 @@ function App() {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Preview */}
+      <section id="projects" className="py-35 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+            Featured Projects
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((project) => (
+              <Card key={project} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <CardHeader>
+                  <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md mb-4 flex items-center justify-center">
+                    <span className="text-slate-500 text-sm">Project Screenshot</span>
+                  </div>
+                  <CardTitle>Project Title {project}</CardTitle>
+                  <CardDescription>
+                    A brief description of what this project does and the problems it solves.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="outline">React</Badge>
+                    <Badge variant="outline">TypeScript</Badge>
+                    <Badge variant="outline">Tailwind</Badge>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="flex-1">
+                      View Code
+                    </Button>
+                    <Button size="sm" className="flex-1">
+                      Live Demo
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
