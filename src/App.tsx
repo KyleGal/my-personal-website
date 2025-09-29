@@ -128,7 +128,7 @@ function App() {
       </section>
 
       {/* Career Path Section */}
-      <section id="experience" className="py-35 px-4 bg-slate-50">
+      <section id="experience" className="py-35 px-4 bg-slate-50 pb-50">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-10 text-slate-900">
             Experience
@@ -173,7 +173,7 @@ function App() {
                     </div>
                     <p className="text-slate-600 text-sm mb-3">Founding Engineer (Full Stack)</p>
                     <p className="text-slate-700">
-                      Building scalable web applications and leading frontend architecture decisions.
+                      Built gRPC + Supabase backend; now developing cross-platform Electron app.
                     </p>
                   </div>
                 </div>
@@ -305,38 +305,90 @@ function App() {
       <section id="projects" className="py-35 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
-            Featured Projects
+            Projects
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((project) => (
-              <Card key={project} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <CardHeader>
-                  <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md mb-4 flex items-center justify-center">
-                    <span className="text-slate-500 text-sm">Project Screenshot</span>
-                  </div>
-                  <CardTitle>Project Title {project}</CardTitle>
-                  <CardDescription>
-                    A brief description of what this project does and the problems it solves.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">React</Badge>
-                    <Badge variant="outline">TypeScript</Badge>
-                    <Badge variant="outline">Tailwind</Badge>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
+            <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <CardHeader>
+                <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md mb-4 flex items-center justify-center">
+                  <span className="text-slate-500 text-sm">
+                    <img src="/public/images/miocar.png" alt="Míocar"></img>
+                  </span>
+                </div>
+                <CardTitle>Miocar Web Extension Scripts</CardTitle>
+                <CardDescription>
+                  This repository contains a collection of user scripts intended for use with Tampermonkey. Each script automates various tasks on the Miocar's share.car administrative portal or on related services such as MVRCheck.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline">JavaScript</Badge>
+                  <Badge variant="outline">Tampermonkey</Badge>
+                </div>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="flex-1" asChild>
+                    <a href="https://github.com/Hummaton/MioCar-WebExtension-Scripts" target="_blank" className="button-link">
                       View Code
-                    </Button>
-                    <Button size="sm" className="flex-1">
-                      Live Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1" hidden>
+              <CardHeader>
+                <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md mb-4 flex items-center justify-center">
+                  <span className="text-slate-500 text-sm">Project Screenshot</span>
+                </div>
+                <CardTitle>Project Title 2</CardTitle>
+                <CardDescription>
+                  A brief description of what this project does and the problems it solves.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline">React</Badge>
+                  <Badge variant="outline">TypeScript</Badge>
+                  <Badge variant="outline">Tailwind</Badge>
+                </div>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="flex-1">
+                    View Code
+                  </Button>
+                  <Button size="sm" className="flex-1">
+                    Live Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1" hidden>
+              <CardHeader>
+                <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md mb-4 flex items-center justify-center">
+                  <span className="text-slate-500 text-sm">Project Screenshot</span>
+                </div>
+                <CardTitle>Project Title 3</CardTitle>
+                <CardDescription>
+                  A brief description of what this project does and the problems it solves.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline">React</Badge>
+                  <Badge variant="outline">TypeScript</Badge>
+                  <Badge variant="outline">Tailwind</Badge>
+                </div>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="flex-1">
+                    View Code
+                  </Button>
+                  <Button size="sm" className="flex-1">
+                    Live Demo
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -349,9 +401,15 @@ function App() {
             Always open to discussing new opportunities and interesting projects.
           </p>
           <div className="flex gap-4 justify-center">
-            <Button variant="outline">GitHub</Button>
-            <Button variant="outline">LinkedIn</Button>
-            <Button>Email Me</Button>
+            <Button variant="outline" asChild>
+              <a href="https://github.com/KyleGal" target="_blank" className="button-link">GitHub</a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href="https://www.linkedin.com/in/kylegalvez/" target="_blank" className="button-link">LinkedIn</a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href="mailto:kgalvez.work@gmail.com" target="_blank" className="button-link">Email Me</a>
+              </Button>
           </div>
           <Separator className="my-8" />
           <p className="text-sm text-slate-500">
