@@ -130,34 +130,19 @@ function App() {
       {/* Career Path Section */}
       <section id="experience" className="py-35 px-4 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
-            Career Path
+          <h2 className="text-3xl font-bold text-center mb-10 text-slate-900">
+            Experience
           </h2>
           
           <div className="space-y-8">
             {/* Recent Career Items */}
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Recent Job */}
-              <Card className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <span className="text-blue-600 font-semibold text-lg">💼</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-slate-900">Meetsta</h3>
-                      <Badge variant="outline">April 2025 - Present</Badge>
-                    </div>
-                    <p className="text-slate-600 text-sm mb-3">Founding Engineer (Full Stack)</p>
-                    <p className="text-slate-700">
-                      Building scalable web applications and leading frontend architecture decisions.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-
+            <div className={`grid md:grid-cols-2 gap-8 transition-all duration-1000 ease-in-out ${
+              isCareerExpanded
+                ? 'opacity-0 max-h-0 overflow-hidden transform -translate-y-4'
+                : 'opacity-100 max-h-[500px] transform translate-y-0'
+            }`}>
               {/* Recent Education */}
-              <Card className="p-6">
+              <Card id="recent_edu" className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                     <span className="text-green-600 font-semibold text-lg">🎓</span>
@@ -174,14 +159,33 @@ function App() {
                   </div>
                 </div>
               </Card>
+
+              {/* Recent Job */}
+              <Card id="recent_job" className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-blue-600 font-semibold text-lg">💼</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-semibold text-slate-900">Meetsta</h3>
+                      <Badge variant="outline">April 2025 - Present</Badge>
+                    </div>
+                    <p className="text-slate-600 text-sm mb-3">Founding Engineer (Full Stack)</p>
+                    <p className="text-slate-700">
+                      Building scalable web applications and leading frontend architecture decisions.
+                    </p>
+                  </div>
+                </div>
+              </Card>
             </div>
 
-            {/* Expand Button */}
+            {/* Expand/Collapse Button */}
             <div className="text-center">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => setIsCareerExpanded(!isCareerExpanded)}
-                className="px-8"
+                className="px-8 transition-all duration-300"
               >
                 {isCareerExpanded ? 'Show Less' : 'Expand Full Career Path'}
                 <span className="ml-2">
@@ -190,195 +194,109 @@ function App() {
               </Button>
             </div>
 
-            {/* Expanded Career Timeline - Zoom Out View */}
-            {isCareerExpanded && (
-              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in-0 duration-300">
-                <div className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-                  {/* Header */}
-                  <div className="sticky top-0 bg-white border-b p-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="text-2xl font-bold text-slate-900">Career Journey</h3>
-                      <p className="text-slate-600">From beginner to professional developer</p>
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      onClick={() => setIsCareerExpanded(false)}
-                      className="text-slate-500 hover:text-slate-700"
-                    >
-                      ✕
-                    </Button>
-                  </div>
+            {/* Expanded Career Timeline */}
+            <div className={`transition-all duration-2000 ease-in-out ${
+              isCareerExpanded
+                ? 'opacity-100 max-h-[2000px] transform translate-y-0'
+                : 'opacity-0 max-h-0 overflow-hidden transform translate-y-4'
+            }`}>
+              <section className="pt-10 px-4">
+                {/* Container */}
+                <div className="md:space-y-30 space-y-10 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
 
-                  {/* Scrollable Timeline */}
-                  <div className="overflow-y-auto max-h-[calc(90vh-120px)] p-6">
-                    <div className="relative">
-                      {/* Continuous timeline line */}
-                      <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 via-green-500 via-orange-500 to-slate-400 rounded-full"></div>
-                      
-                      <div className="space-y-12">
-                        {/* Current Position */}
-                        <div className="relative flex items-start gap-8">
-                          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                            <span className="text-white text-xl">💼</span>
-                          </div>
-                          <Card className="flex-1 p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="flex items-start justify-between mb-3">
-                              <div>
-                                <h4 className="text-xl font-bold text-slate-900">Software Developer</h4>
-                                <p className="text-blue-600 font-semibold">Meetsta</p>
-                              </div>
-                              <Badge className="bg-blue-100 text-blue-700 border-blue-200">April 2025 - Present</Badge>
-                            </div>
-                            <p className="text-slate-700 mb-4 leading-relaxed">
-                              Building scalable web applications and leading frontend architecture decisions. 
-                              Developing innovative solutions for modern web technologies and user experiences.
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                              <Badge variant="secondary">React</Badge>
-                              <Badge variant="secondary">TypeScript</Badge>
-                              <Badge variant="secondary">Team Leadership</Badge>
-                              <Badge variant="secondary">Architecture</Badge>
-                            </div>
-                          </Card>
-                        </div>
-
-                        {/* Previous Job */}
-                        <div className="relative flex items-start gap-8">
-                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                            <span className="text-white text-xl">💻</span>
-                          </div>
-                          <Card className="flex-1 p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="flex items-start justify-between mb-3">
-                              <div>
-                                <h4 className="text-xl font-bold text-slate-900">Frontend Developer</h4>
-                                <p className="text-purple-600 font-semibold">Startup Co.</p>
-                              </div>
-                              <Badge className="bg-purple-100 text-purple-700 border-purple-200">2022 - 2023</Badge>
-                            </div>
-                            <p className="text-slate-700 mb-4 leading-relaxed">
-                              Developed responsive web applications and implemented modern UI/UX designs. Collaborated closely with design teams 
-                              to bring creative visions to life while maintaining high performance standards.
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                              <Badge variant="secondary">Vue.js</Badge>
-                              <Badge variant="secondary">CSS3</Badge>
-                              <Badge variant="secondary">Figma</Badge>
-                              <Badge variant="secondary">SCSS</Badge>
-                            </div>
-                          </Card>
-                        </div>
-
-                        {/* Education */}
-                        <div className="relative flex items-start gap-8">
-                          <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                            <span className="text-white text-xl">🎓</span>
-                          </div>
-                          <Card className="flex-1 p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="flex items-start justify-between mb-3">
-                              <div>
-                                <h4 className="text-xl font-bold text-slate-900">Bachelor of Science in Computer Science</h4>
-                                <p className="text-green-600 font-semibold">UC Davis</p>
-                              </div>
-                              <Badge className="bg-green-100 text-green-700 border-green-200">2019 - 2023</Badge>
-                            </div>
-                            <p className="text-slate-700 mb-4 leading-relaxed">
-                              Graduated with Bachelor of Science in Computer Science and minor in Technology Management. 
-                              Specialized in software engineering, data structures, and algorithms with additional focus on project management and technology strategy.
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                              <Badge variant="secondary">Java</Badge>
-                              <Badge variant="secondary">Python</Badge>
-                              <Badge variant="secondary">Database Design</Badge>
-                              <Badge variant="secondary">Algorithms</Badge>
-                              <Badge variant="secondary">Technology Management</Badge>
-                            </div>
-                          </Card>
-                        </div>
-
-                        {/* Internship */}
-                        <div className="relative flex items-start gap-8">
-                          <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                            <span className="text-white text-xl">🚀</span>
-                          </div>
-                          <Card className="flex-1 p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="flex items-start justify-between mb-3">
-                              <div>
-                                <h4 className="text-xl font-bold text-slate-900">Software Engineering Intern</h4>
-                                <p className="text-orange-600 font-semibold">Big Tech Corp</p>
-                              </div>
-                              <Badge className="bg-orange-100 text-orange-700 border-orange-200">Summer 2022</Badge>
-                            </div>
-                            <p className="text-slate-700 mb-4 leading-relaxed">
-                              Contributed to mobile application development and gained experience in agile methodologies. 
-                              Worked on feature development and bug fixes while learning industry best practices.
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                              <Badge variant="secondary">React Native</Badge>
-                              <Badge variant="secondary">Node.js</Badge>
-                              <Badge variant="secondary">Agile</Badge>
-                              <Badge variant="secondary">Git</Badge>
-                            </div>
-                          </Card>
-                        </div>
-
-                        {/* First Programming Experience */}
-                        <div className="relative flex items-start gap-8">
-                          <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                            <span className="text-white text-xl">⚡</span>
-                          </div>
-                          <Card className="flex-1 p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="flex items-start justify-between mb-3">
-                              <div>
-                                <h4 className="text-xl font-bold text-slate-900">First Programming Class</h4>
-                                <p className="text-indigo-600 font-semibold">University Introduction Course</p>
-                              </div>
-                              <Badge className="bg-indigo-100 text-indigo-700 border-indigo-200">2020</Badge>
-                            </div>
-                            <p className="text-slate-700 mb-4 leading-relaxed">
-                              The spark that ignited my passion for programming. Built my first "Hello World" program and discovered 
-                              the joy of solving problems through code.
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                              <Badge variant="secondary">Python</Badge>
-                              <Badge variant="secondary">Problem Solving</Badge>
-                              <Badge variant="secondary">Logic</Badge>
-                            </div>
-                          </Card>
-                        </div>
-
-                        {/* High School */}
-                        <div className="relative flex items-start gap-8">
-                          <div className="w-16 h-16 bg-gradient-to-br from-slate-500 to-slate-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                            <span className="text-white text-xl">🏫</span>
-                          </div>
-                          <Card className="flex-1 p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="flex items-start justify-between mb-3">
-                              <div>
-                                <h4 className="text-xl font-bold text-slate-900">High School Diploma</h4>
-                                <p className="text-slate-600 font-semibold">Local High School</p>
-                              </div>
-                              <Badge className="bg-slate-100 text-slate-700 border-slate-200">2015 - 2019</Badge>
-                            </div>
-                            <p className="text-slate-700 leading-relaxed">
-                              Where it all began. Discovered a love for mathematics and problem-solving that would later 
-                              lead to my passion for programming and software development.
-                            </p>
-                          </Card>
-                        </div>
+                  {/* <!-- Current Job --> */}
+                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                      {/* <!-- Icon --> */}
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-blue-400 text-slate-500 group-[.is-active]:text-blue-600 shadow shrink-0 absolute md:left-1/2 md:-translate-x-1/2">
+                          <span className="text-white text-xl">💼</span>
                       </div>
-                    </div>
-
-                    {/* Footer note */}
-                    <div className="text-center mt-12 py-6 border-t">
-                      <p className="text-slate-500 text-sm">
-                        Every step has been a learning experience 🚀
-                      </p>
-                    </div>
+                      {/* <!-- Card --> */}
+                      <div className="w-[calc(100%-4rem)] ml-16 md:ml-0 md:w-[calc(60%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow md:absolute md:left-[calc(50%+3rem)]">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                              <div className="font-bold text-slate-900">Founding Engineer (Full Stack)</div>
+                              <Badge variant="outline">April 2025 - Present</Badge>
+                          </div>
+                          <div className="md:text-left text-slate-500">
+                            Meetsta
+                          </div>
+                      </div>
                   </div>
+
+                  {/* <!-- UC Davis EcoCAR --> */}
+                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                      {/* <!-- Icon --> */}
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-blue-400 text-slate-500 group-[.is-active]:text-blue-600 shadow shrink-0 absolute md:left-1/2 md:-translate-x-1/2">
+                          <span className="text-white text-xl">💼</span>
+                      </div>
+                      {/* <!-- Card --> */}
+                      <div className="w-[calc(100%-4rem)] ml-16 md:ml-0 md:w-[calc(60%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow md:absolute md:left-[calc(50%+3rem)]">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                              <div className="font-bold text-slate-900">Lead Software Developer</div>
+                              <Badge variant="outline">Oct 2024 - Aug 2025</Badge>
+                          </div>
+                          <div className="md:text-left text-slate-500">
+                            UC Davis EcoCAR
+                          </div>
+                      </div>
+                  </div>
+
+                  {/* <!-- UC Davis Computer Science Tutoring --> */}
+                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                      {/* <!-- Icon --> */}
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-blue-400 text-slate-500 group-[.is-active]:text-blue-600 shadow shrink-0 absolute md:left-1/2 md:-translate-x-1/2">
+                          <span className="text-white text-xl">📚</span>
+                      </div>
+                      {/* <!-- Card --> */}
+                      <div className="w-[calc(100%-4rem)] ml-16 md:ml-0 md:w-[calc(60%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow md:absolute md:left-[calc(50%+3rem)]">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                              <div className="font-bold text-slate-900">Computer Science Tutor</div>
+                              <Badge variant="outline">Oct 2024 - June 2025</Badge>
+                          </div>
+                          <div className="md:text-left text-slate-500">
+                            UC Davis Computer Science
+                          </div>
+                      </div>
+                  </div>
+
+                  {/* University */}
+                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                      {/* <!-- Icon --> */}
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-purple-400 text-slate-500 group-[.is-active]:text-purple-500 shadow shrink-0 absolute md:left-1/2 md:-translate-x-1/2">
+                          <span className="text-green-600 font-semibold text-lg">🎓</span>
+                      </div>
+                      {/* <!-- Card --> */}
+                      <div className="w-[calc(100%-4rem)] ml-16 md:ml-0 md:w-[calc(60%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow md:absolute md:right-[calc(50%+3rem)]">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                              <div className="font-bold text-slate-900">UC Davis</div>
+                              <Badge variant="outline">Graduated 2025</Badge>
+                          </div>
+                          <div className="text-slate-500">
+                            BS in Computer Science and minor in Technology Management.
+                          </div>
+                      </div>
+                  </div>
+
+                  {/* High School */}
+                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                      {/* <!-- Icon --> */}
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-purple-400 text-slate-500 group-[.is-active]:text-purple-500 shadow shrink-0 absolute md:left-1/2 md:-translate-x-1/2">
+                          <span className="text-green-600 font-semibold text-lg">🎓</span>
+                      </div>
+                      {/* <!-- Card --> */}
+                      <div className="w-[calc(100%-4rem)] ml-16 md:ml-0 md:w-[calc(60%-2.5rem)] bg-white p-4 rounded border border-slate-200 shadow md:absolute md:right-[calc(50%+3rem)]">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                              <div className="font-bold text-slate-900">Mater Dei High School</div>
+                              <Badge variant="outline">Graduated 2020</Badge>
+                          </div>
+                          <div className="text-slate-500">
+                            Honor Roll all four years. Volleyball student athlete.
+                          </div>
+                      </div>
+                  </div>
+
                 </div>
-              </div>
-            )}
+              </section>
+            </div>
           </div>
         </div>
       </section>
